@@ -26,4 +26,21 @@ protected:
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+private:
+	// Voice
+	float Frequency = 440.0f;
+	float BinauralBeatFreq = 40.0f;
+	float MIX_L_R = 0.548f;
+	float Boost = 0.0f;
+
+	// Delay
+	float Attack_Time = 1.0f;
+	float Decay_Time = 1.0f;
+	float Attack_Curve = 1.0f;
+	float Decay_Curve = 1.0f;
+
+	// MIX
+	float Gain_0 = 1.0f;
+	float Gain_1_1 = 0.0f;
 };
