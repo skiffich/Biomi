@@ -26,10 +26,4 @@ protected:
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-private:
-	// Function to toggle frequency
-	void ToggleFrequency();
-
-	bool bIsHighFrequency = false;
 };

@@ -2,6 +2,7 @@
 
 
 #include "BiomiMetasound.h"
+#include <imgui.h> // This header is required to make use of Dear ImGui
 
 // Sets default values
 ABiomiMetasound::ABiomiMetasound()
@@ -21,23 +22,6 @@ void ABiomiMetasound::BeginPlay()
 
     EnableInput(GetWorld()->GetFirstPlayerController());
 
-    // Ensure this actor can handle input.
-    if (!InputComponent)
-    {
-        InputComponent = NewObject<UInputComponent>(this);
-        if (InputComponent)
-        {
-            InputComponent->RegisterComponent();
-            this->AddInstanceComponent(InputComponent);
-        }
-    }
-
-    // Subscribe to Enter pressed
-    if (InputComponent)
-    {
-        InputComponent->BindKey(EKeys::Enter, IE_Pressed, this, &ABiomiMetasound::ToggleFrequency);
-    }
-
     Metasound->Play();
 }
 
@@ -46,14 +30,14 @@ void ABiomiMetasound::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    // Assuming 'AdditionalOperands 2' is a parameter name you have defined in your Metasound
-    Metasound->SetFloatParameter(FName("AdditionalOperands 2"), bIsHighFrequency ? 440.0f : 100.0f);
-}
+    const FString Label = GetActorLabel();
 
-void ABiomiMetasound::ToggleFrequency()
-{
-    bIsHighFrequency = !bIsHighFrequency;
-    UE_LOG(LogTemp, Display, TEXT("%f"), bIsHighFrequency ? 440.0f : 100.0f);
+    ImGui::Begin(TCHAR_TO_ANSI(*Label), nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+    
+    // Assuming 'AdditionalOperands 2' is a parameter name you have defined in your Metasound
+    float Frequency = 440.0f;
+    ImGui::SliderFloat("Frequency", &Frequency, 0.0f, 990.0f);
+    Metasound->SetFloatParameter(FName("AdditionalOperands 2"), Frequency);
 }
 
 
