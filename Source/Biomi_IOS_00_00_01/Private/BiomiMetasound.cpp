@@ -106,10 +106,10 @@ void ABiomiMetasound::Tick(float DeltaTime)
     if (ImGui::TreeNode("MIX"))
     {
         ImGui::SliderFloat("Voice 1", &Gain_0, 0.0f, 1.0f);
-        Metasound->SetFloatParameter(FName("Gain 0"), Gain_0); // Assuming 'AAttack Time' is a parameter name you have defined in your Metasound
+        Metasound->SetFloatParameter(FName("Voice 1"), Gain_0); // Assuming 'AAttack Time' is a parameter name you have defined in your Metasound
 
         ImGui::SliderFloat("Voice 2", &Gain_1_1, 0.0f, 1.0f);
-        Metasound->SetFloatParameter(FName("Gain 1 1"), Gain_1_1); // Assuming 'AAttack Time' is a parameter name you have defined in your Metasound
+        Metasound->SetFloatParameter(FName("Voice 2"), Gain_1_1); // Assuming 'AAttack Time' is a parameter name you have defined in your Metasound
 
         ImGui::TreePop(); // End tree node
     }
