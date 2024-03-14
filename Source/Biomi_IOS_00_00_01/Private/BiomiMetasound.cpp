@@ -33,38 +33,76 @@ void ABiomiMetasound::Tick(float DeltaTime)
     const FString Label = GetActorLabel();
     ImGui::Begin(TCHAR_TO_ANSI(*Label), nullptr, ImGuiWindowFlags_AlwaysAutoResize);
     
-    if (ImGui::CollapsingHeader("Voice"))
+    if (ImGui::CollapsingHeader("Voice 1"))
     {
-        ImGui::SliderFloat("fundamental frequency", &Frequency, 0.0f, 990.0f);
-        Metasound->SetFloatParameter(FName("AdditionalOperands 2"), Frequency); // Assuming 'AdditionalOperands 2' is a parameter name you have defined in your Metasound
+        ImGui::SliderFloat("Fundamental_Frequency_V1", &Frequency_V1, 0.0f, 990.0f);
+        Metasound->SetFloatParameter(FName("Fundamental_Frequency_V1"), Frequency_V1); // Assuming 'AdditionalOperands 2' is a parameter name you have defined in your Metasound
 
-        ImGui::SliderFloat("Binaural Beat Freq", &BinauralBeatFreq, -40.0f, 40.0f);
-        Metasound->SetFloatParameter(FName("AdditionalOperands"), BinauralBeatFreq); // Assuming 'AdditionalOperands' is a parameter name you have defined in your Metasound
+        ImGui::SliderFloat("Binaural_Beat_Freq_V1", &BinauralBeatFreq_V1, -40.0f, 40.0f);
+        Metasound->SetFloatParameter(FName("Binaural_Beat_Freq_V1"), BinauralBeatFreq_V1); // Assuming 'AdditionalOperands' is a parameter name you have defined in your Metasound
 
-        ImGui::SliderFloat("MIX L R", &MIX_L_R, 0.0f, 1.0f);
-        Metasound->SetFloatParameter(FName("Gain 1"), MIX_L_R); // Assuming 'Gain 1' is a parameter name you have defined in your Metasound
+        ImGui::SliderFloat("MIX_L_R_V1", &MIX_L_R_V1, 0.0f, 1.0f);
+        Metasound->SetFloatParameter(FName("MIX_L_R_V1"), MIX_L_R_V1); // Assuming 'Gain 1' is a parameter name you have defined in your Metasound
 
-        ImGui::SliderFloat("Boost", &Boost, 0.0f, 5.0f);
-        Metasound->SetFloatParameter(FName("AdditionalOperands 3"), Boost); // Assuming 'AdditionalOperands 3' is a parameter name you have defined in your Metasound
-        
+        ImGui::SliderFloat("Boost_V1", &Boost_V1, 0.0f, 5.0f);
+        Metasound->SetFloatParameter(FName("Boost_V1"), Boost_V1); // Assuming 'AdditionalOperands 3' is a parameter name you have defined in your Metasound
+
+        if (ImGui::TreeNode("Delay"))
+        {
+            ImGui::SliderFloat("Attack_Time_V1", &Attack_Time_V1, 0.0f, 1.0f);
+            Metasound->SetFloatParameter(FName("Attack_Time_V1"), Attack_Time_V1); // Assuming 'AAttack Time' is a parameter name you have defined in your Metasound
+
+            ImGui::SliderFloat("Decay Time", &Decay_Time_V1, 0.0f, 1.0f);
+            Metasound->SetFloatParameter(FName("Decay_Time_V1"), Decay_Time_V1); // Assuming 'AAttack Time' is a parameter name you have defined in your Metasound
+
+            ImGui::SliderFloat("Attack Curve", &Attack_Curve_V1, 0.0f, 1.0f);
+            Metasound->SetFloatParameter(FName("Attack_Curve_V1"), Attack_Curve_V1); // Assuming 'Attack Curve' is a parameter name you have defined in your Metasound
+
+            ImGui::SliderFloat("Decay Curve", &Decay_Curve_V1, 0.0f, 1.0f);
+            Metasound->SetFloatParameter(FName("Decay_Curve_V2"), Decay_Curve_V1); // Assuming 'Decay Curve' is a parameter name you have defined in your Metasound
+
+            ImGui::TreePop(); // End tree node
+        }
+
+        ImGui::Separator();
         ImGui::TreePop(); // End tree node
     }
-    if (ImGui::TreeNode("Delay"))
+
+    if (ImGui::CollapsingHeader("Voice 2"))
     {
-        ImGui::SliderFloat("Attack Time", &Attack_Time, 0.0f, 1.0f);
-        Metasound->SetFloatParameter(FName("Attack Time"), Attack_Time); // Assuming 'AAttack Time' is a parameter name you have defined in your Metasound
+        ImGui::SliderFloat("Fundamental_Frequency_V2", &Frequency_V2, 0.0f, 990.0f);
+        Metasound->SetFloatParameter(FName("Fundamental_Frequency_V2"), Frequency_V2); // Assuming 'AdditionalOperands 2' is a parameter name you have defined in your Metasound
 
-        ImGui::SliderFloat("Decay Time", &Decay_Time, 0.0f, 1.0f);
-        Metasound->SetFloatParameter(FName("Decay Time"), Decay_Time); // Assuming 'AAttack Time' is a parameter name you have defined in your Metasound
+        ImGui::SliderFloat("Binaural_Beat_Freq_V2", &BinauralBeatFreq_V2, -40.0f, 40.0f);
+        Metasound->SetFloatParameter(FName("Binaural_Beat_Freq_V2"), BinauralBeatFreq_V2); // Assuming 'AdditionalOperands' is a parameter name you have defined in your Metasound
 
-        ImGui::SliderFloat("Attack Curve", &Attack_Curve, 0.0f, 1.0f);
-        Metasound->SetFloatParameter(FName("Attack Curve"), Attack_Curve); // Assuming 'Attack Curve' is a parameter name you have defined in your Metasound
+        ImGui::SliderFloat("MIX_L_R_V2", &MIX_L_R_V2, 0.0f, 1.0f);
+        Metasound->SetFloatParameter(FName("MIX_L_R_V2"), MIX_L_R_V2); // Assuming 'Gain 1' is a parameter name you have defined in your Metasound
 
-        ImGui::SliderFloat("Decay Curve", &Decay_Curve, 0.0f, 1.0f);
-        Metasound->SetFloatParameter(FName("Decay Curve"), Decay_Curve); // Assuming 'Decay Curve' is a parameter name you have defined in your Metasound
+        ImGui::SliderFloat("Boost_V2", &Boost_V2, 0.0f, 5.0f);
+        Metasound->SetFloatParameter(FName("Boost_V2"), Boost_V2); // Assuming 'AdditionalOperands 3' is a parameter name you have defined in your Metasound
 
+        if (ImGui::TreeNode("Delay"))
+        {
+            ImGui::SliderFloat("Attack_Time_V2", &Attack_Time_V2, 0.0f, 1.0f);
+            Metasound->SetFloatParameter(FName("Attack_Time_V2"), Attack_Time_V2); // Assuming 'AAttack Time' is a parameter name you have defined in your Metasound
+
+            ImGui::SliderFloat("Decay Time", &Decay_Time_V2, 0.0f, 1.0f);
+            Metasound->SetFloatParameter(FName("Decay_Time_V2"), Decay_Time_V2); // Assuming 'AAttack Time' is a parameter name you have defined in your Metasound
+
+            ImGui::SliderFloat("Attack Curve", &Attack_Curve_V2, 0.0f, 1.0f);
+            Metasound->SetFloatParameter(FName("Attack_Curve_V2"), Attack_Curve_V2); // Assuming 'Attack Curve' is a parameter name you have defined in your Metasound
+
+            ImGui::SliderFloat("Decay Curve", &Decay_Curve_V2, 0.0f, 1.0f);
+            Metasound->SetFloatParameter(FName("Decay_Curve_V2"), Decay_Curve_V2); // Assuming 'Decay Curve' is a parameter name you have defined in your Metasound
+
+            ImGui::TreePop(); // End tree node
+        }
+
+        ImGui::Separator();
         ImGui::TreePop(); // End tree node
     }
+    
     if (ImGui::TreeNode("MIX"))
     {
         ImGui::SliderFloat("Gain 0", &Gain_0, 0.0f, 1.0f);
